@@ -30,7 +30,6 @@ class User(StatesGroup):
 @router.message(CommandStart())
 async def start(message: Message):
     await message.answer(text=text.start_text, reply_markup=kb.main)
-    await message.answer(f'{message.message_thread_id}')
     await message.delete()
 
 @router.callback_query(F.data == 'main')
@@ -42,13 +41,13 @@ async def start(callback: CallbackQuery):
 @router.callback_query(F.data == 'address')
 async def address(callback: CallbackQuery):
     await callback.answer('')
-    await callback.message.edit_text(text=f'Наша студия находится в Черниковке, по адресу Льва Толстого, 21! Третий этаж, офис первый', reply_markup=kb.address)
+    await callback.message.edit_text(text=f'Наша студия находится в Черниковке, по адресу Льва Толстого, 21! Третий этаж, офис первый', reply_markup=kb.back_menu)
 
 @router.callback_query(F.data == 'services')
 async def address(callback: CallbackQuery):
     await callback.answer('')
     media = InputMediaPhoto(media=photo.headphones_01, caption = f'{text.services_text}')
-    await callback.message.edit_media(media = media, reply_markup=kb.services)
+    await callback.message.edit_media(media = media, reply_markup=kb.back_menu)
 
 @router.callback_query(F.data == 'booking_time')
 async def booking_time(callback: CallbackQuery):
@@ -58,7 +57,7 @@ async def booking_time(callback: CallbackQuery):
 @router.callback_query(F.data == 'meeting')
 async def meeting(callback: CallbackQuery, state: FSMContext):
     await callback.answer('')
-    await callback.message.edit_text(text='Какой день хотите забронировать?')
+    await callback.message.answer(text='Какой день хотите забронировать?', reply_markup=kb.back_menu)
     await state.set_state(User.date)
 
 @router.message(User.date)
@@ -70,7 +69,7 @@ async def date_time(message: Message, state: FSMContext):
         await state.set_state(User.date)
     else:
         await state.update_data(date = message.text)
-        await message.answer('На какое время?')
+        await message.answer('На какое время?', reply_markup=kb.back_menu)
         await state.set_state(User.start)
 
 @router.message(User.start)
@@ -83,7 +82,7 @@ async def start_time(message: Message, state: FSMContext):
         await state.set_state(User.start)
     else:
         await state.update_data(start = message.text)
-        await message.answer("На сколько часов?")
+        await message.answer("На сколько часов?", reply_markup=kb.back_menu)
         await state.set_state(User.hours)
 
 @router.message(User.hours)

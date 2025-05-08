@@ -6,11 +6,7 @@ main = InlineKeyboardMarkup(inline_keyboard=[
     [InlineKeyboardButton(text='🏰 Как до нас добраться?', callback_data = 'address')],
 ])
 
-address = InlineKeyboardMarkup(inline_keyboard=[
-    [InlineKeyboardButton(text='⬅️ Назад в меню', callback_data='main')],
-])
-
-services = InlineKeyboardMarkup(inline_keyboard=[
+back_menu = InlineKeyboardMarkup(inline_keyboard=[
     [InlineKeyboardButton(text='⬅️ Назад в меню', callback_data='main')],
 ])
 
@@ -19,6 +15,7 @@ booking_time = InlineKeyboardMarkup(inline_keyboard=[
     [InlineKeyboardButton(text='🔔 Записаться', callback_data = 'meeting')],
     [InlineKeyboardButton(text='⬅️ Назад в меню', callback_data = 'main')],
 ])
+
 
 payment_ready = InlineKeyboardMarkup(inline_keyboard=[
     [InlineKeyboardButton(text='🆗 Перейти к оплате', callback_data = 'go_payment')],
