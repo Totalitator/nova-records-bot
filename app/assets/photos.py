@@ -1,0 +1,1 @@
+headphones_01 = 'https://sun9-79.userapi.com/impg/gff_kVrWldEeMeIaNfcE_BCNxR1KgVN_JNqOrQ/2qiBUvXYfms.jpg?size=2560x1440&quality=95&sign=a570a1652a73c643c2157edb13b01da5&type=album'
